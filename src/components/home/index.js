@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import Tuits from "../tuits/index";
 import * as service from "../../services/tuits-service";
 import * as security_service from "../../services/security-service"
+import EmojiPicker from "./emoji-picker";
 import {useLocation, useParams} from "react-router-dom";
 
 const Home = () => {
@@ -45,6 +46,8 @@ const Home = () => {
                     </div>
                     <div className="p-2 w-100">
             <textarea
+                style={{fontFamily: "twemoji"}}
+                value={tuit}
                 onChange={(e) =>
                     setTuit(e.target.value)}
                 placeholder="What's happening?"
@@ -54,7 +57,7 @@ const Home = () => {
                                 <i className="fas fa-portrait me-3"/>
                                 <i className="far fa-gif me-3"/>
                                 <i className="far fa-bar-chart me-3"/>
-                                <i className="far fa-face-smile me-3"/>
+                                <EmojiPicker tuit={tuit} setTuit={setTuit}/>
                                 <i className="far fa-calendar me-3"/>
                                 <i className="far fa-map-location me-3"/>
                             </div>
