@@ -3,6 +3,8 @@ import Tuits from "../tuits/index";
 import * as service from "../../services/tuits-service";
 import * as security_service from "../../services/security-service"
 import EmojiPicker from "./emoji-picker";
+import ImageUploader from "./image-uploader";
+import Uploady, {useUploady} from "@rpldy/uploady";
 import {useLocation, useParams} from "react-router-dom";
 
 const Home = () => {
@@ -11,6 +13,7 @@ const Home = () => {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [tuits, setTuits] = useState([]);
     const [tuit, setTuit] = useState('');
+    const [imageId, setImageId] = useState([]);
     const userId = uid;
     const isUserLoggedIn = () =>
         security_service.profile()
@@ -35,6 +38,24 @@ const Home = () => {
     const createTuit = () =>
         service.createTuit('me', {tuit})
             .then(findTuits)
+
+    const UploadButton = () => {
+        const {processPending} = useUploady();
+        return (
+            <div className="col-2">
+                {isLoggedIn && <a
+                    onClick={() => {
+                        processPending();
+                        // createTuit();
+                    }}
+                    className={`btn btn-primary rounded-pill fa-pull-right fw-bold ps-4 pe-4`}
+                >
+                    Tuit
+                </a>}
+            </div>
+        )
+    }
+
     return (
         <div className="ttr-home">
             <div className="border border-bottom-0">
@@ -52,23 +73,30 @@ const Home = () => {
                     setTuit(e.target.value)}
                 placeholder="What's happening?"
                 className="w-100 border-0"/>
-                        <div className="row">
-                            <div className="col-10 ttr-font-size-150pc text-primary">
-                                <i className="fas fa-portrait me-3"/>
-                                <i className="far fa-gif me-3"/>
-                                <i className="far fa-bar-chart me-3"/>
-                                <EmojiPicker tuit={tuit} setTuit={setTuit}/>
-                                <i className="far fa-calendar me-3"/>
-                                <i className="far fa-map-location me-3"/>
+                        <Uploady
+                            debug
+                            multiple={false}
+                            autoUpload={false}
+                            sendWithFormData
+                            inputFieldName={"images"}
+                            params={"multipart/form-data"}
+                            grouped
+                            maxGroupSize={4}
+                            method="POST"
+                            destination={{url: "http://localhost:4000/api/tuits/image/upload"}}
+                        >
+                            <div className="row">
+                                <div className="col-10 ttr-font-size-150pc text-primary">
+                                    <ImageUploader setImageId={setImageId}/>
+                                    <i className="far fa-gif me-3"/>
+                                    <i className="far fa-bar-chart me-3"/>
+                                    <EmojiPicker tuit={tuit} setTuit={setTuit}/>
+                                    <i className="far fa-calendar me-3"/>
+                                    <i className="far fa-map-location me-3"/>
+                                </div>
+                                <UploadButton/>
                             </div>
-                            <div className="col-2">
-                                {isLoggedIn && <a onClick={createTuit}
-                                                  className={`btn btn-primary rounded-pill fa-pull-right
-                                fw-bold ps-4 pe-4`}>
-                                    Tuit
-                                </a>}
-                            </div>
-                        </div>
+                        </Uploady>
                     </div>
                 </div>
             </div>
