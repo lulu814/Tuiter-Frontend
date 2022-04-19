@@ -16,7 +16,7 @@ import {Link, useNavigate} from "react-router-dom";
  * @returns {JSX.Element}
  * @constructor
  */
-const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
+const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, bookmarkTuit}) => {
     const navigate = useNavigate();
     const daysOld = (tuit) => {
         const now = new Date();
