@@ -16,7 +16,7 @@ import {Link, useNavigate} from "react-router-dom";
  * @returns {JSX.Element}
  * @constructor
  */
-const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
+const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, bookmarkTuit}) => {
     const navigate = useNavigate();
     const daysOld = (tuit) => {
         const now = new Date();
@@ -50,27 +50,27 @@ const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
                className="ttr-tuit-avatar-logo rounded-circle"/>
         }
       </div>
-        <div className="w-100">
-            <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"/>
-            <Link to={`/tuit/${tuit._id}`}>
-                <i className="float-end fas fa-circle-ellipsis me-1"/>
-            </Link>
-            <h2
-                className="fs-5">
-                {tuit.postedBy && tuit.postedBy.username}
-                @{tuit.postedBy && tuit.postedBy.username} -
-                <span className="ms-1">{daysOld(tuit)}</span></h2>
-            {emoji(tuit.tuit)}
-            {
-                tuit.youtube &&
-                <TuitVideo tuit={tuit}/>
-            }
-            {
-                tuit.image &&
-                <TuitImage tuit={tuit}/>
-            }
-            <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit}/>
-        </div>
+      <div className="w-100">
+          <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"/>
+          <Link to={`/tuit/${tuit._id}`}>
+          <i className="float-end fas fa-circle-ellipsis me-1"/>
+          </Link>
+        <h2
+          className="fs-5">
+          {tuit.postedBy && tuit.postedBy.username}
+          @{tuit.postedBy && tuit.postedBy.username} -
+            <span className="ms-1">{daysOld(tuit)}</span></h2>
+        {tuit.tuit}
+        {
+          tuit.youtube &&
+            <TuitVideo tuit={tuit}/>
+        }
+        {
+          tuit.image &&
+          <TuitImage tuit={tuit}/>
+        }
+        <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit} bookmarkTuit={bookmarkTuit}/>
+      </div>
     </li>
   );
 }

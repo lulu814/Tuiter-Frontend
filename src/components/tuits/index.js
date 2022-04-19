@@ -3,6 +3,7 @@ import './tuits.css';
 import Tuit from "./tuit";
 import * as likesService from "../../services/likes-service";
 import * as tuitService from "../../services/tuits-service";
+import * as bookmarkService from "../../services/bookmarks-service"
 
 /**
  * Tuits component that has a list of tuit object
@@ -22,6 +23,11 @@ const Tuits = ({tuits = [], refreshTuits}) => {
             .then(refreshTuits)
             .catch(e => alert(e))
 
+    const bookmarkTuit = (tuit) =>
+        bookmarkService.userBookmarksTuit('me', tuit._id)
+            .then(refreshTuits)
+            .catch(e => alert(e))
+
     const deleteTuit = (tid) =>
         tuitService.deleteTuit(tid)
             .then(refreshTuits)
@@ -37,6 +43,7 @@ const Tuits = ({tuits = [], refreshTuits}) => {
                               deleteTuit={deleteTuit}
                               likeTuit={likeTuit}
                               dislikeTuit={dislikeTuit}
+                              bookmarkTuit={bookmarkTuit}
                               tuit={tuit}/>)
                 }
             </ul>
