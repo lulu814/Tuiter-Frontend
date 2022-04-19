@@ -40,12 +40,22 @@ export const userBookmarksTuit = (uid, tid) =>
         .then(response => response.data);
 
 /**
+ * Check if the tuit is bookmarked by me
+ * @param uid user id
+ * @param tid tuit id
+ * @returns bookmark object
+ */
+export const tuitBookmarkedByMe = (uid, tid) =>
+    api.get(`${USERS_API}/${uid}/bookmarks/${tid}`)
+        .then(response => response.data);
+
+/**
  * Update that the user unbookmark the tuit
  * @param uid user id
  * @param tid tuit id
  * @returns bookmark object
  */
-export const userUnbookmarksTuit = (uid, tid) =>
+export const findUserBookmarkedTuit = (uid, tid) =>
     api.delete(`${USERS_API}/${uid}/bookmarks/${tid}`)
         .then(response => response.data);
 

@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import * as service from "../../services/likes-service";
+import * as bookmarkService from "../../services/bookmarks-service"
+
 
 /**
  * Component for showing tuit stats including number of replies, retuits, likes and dislikes.
@@ -8,6 +10,7 @@ import * as service from "../../services/likes-service";
  * @param tuit Tuit object that has the stats
  * @param likeTuit function triggered when user click like button
  * @param dislikeTuit function triggered when user click dislike button
+ * @param bookmarkTuit
  * @example
  * const tuit = {tuit: "my tuit", postedBy: "123", stats: {replies: 0, retuits: 0, likes: 0, dislikes: 0}}
  * const likeTuit = () => {}
@@ -17,11 +20,12 @@ import * as service from "../../services/likes-service";
  * )
  */
 const TuitStats = ({
-                       tuit, likeTuit, dislikeTuit = () => {
+                       tuit, likeTuit, dislikeTuit, bookmarkTuit = () => {
     }
                    }) => {
     const [isLikedByMe, setLikeTuit] = useState(false);
     const [isDislikedByMe, setDislikeTuit] = useState(false);
+    const [isBookmarkedByMe, setBookmarkTuit] = useState(false);
     const isTuitLikedByMe = () => {
         service.tuitLikedByMe('me', tuit._id)
             .then((like) => {
@@ -46,8 +50,21 @@ const TuitStats = ({
         return
     }
 
+    const isTuitBookmarkedByMe = () => {
+        bookmarkService.tuitBookmarkedByMe('me', tuit._id)
+            .then((bookmark) => {
+                if (bookmark) {
+                    setBookmarkTuit(true);
+                } else {
+                    setBookmarkTuit(false);
+                }
+            }).catch(e => alert(e))
+        return
+    }
+
     useEffect(isTuitLikedByMe);
     useEffect(isTuitDislikedByMe);
+    useEffect(isTuitBookmarkedByMe);
     return (
         <div className="row mt-2">
             <div className="col">
@@ -88,6 +105,21 @@ const TuitStats = ({
                         <i className="fa-light fa-thumbs-down me-1"/>
                     }
                     <span className="ttr-stats-dislikes">{tuit.stats && tuit.stats.dislikes}</span>
+            </span>
+            </div>
+            <div className="col">
+                <span className="ttr-bookmarks-tuit-click" onClick={() => bookmarkTuit(tuit)}
+                      data-testid="test-bookmarkButton">
+                {
+                    isBookmarkedByMe &&
+                    <i className="fa-solid fa-bookmark me-1" style={{color: 'blue'}}
+                       id="test-bookmarkedByMe"/>
+                }
+                    {
+                        !isBookmarkedByMe &&
+                        <i className="fa-light fa-bookmark me-1"/>
+                    }
+                    <span className="ttr-stats-bookmarks">{tuit.stats && tuit.stats.bookmarks}</span>
             </span>
             </div>
             <div className="col">
