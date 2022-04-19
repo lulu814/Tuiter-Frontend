@@ -1,8 +1,11 @@
 import React from "react";
+import emoji from 'react-easy-emoji'
+
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
-import {useNavigate, Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+
 
 /**
  * Tuit component contains all information of the tuit object
