@@ -1,9 +1,15 @@
 import React from "react";
+import {Image,Transformation} from 'cloudinary-react';
+
 const TuitImage = ({tuit}) => {
+    const generateImgTag = (pubId) => {
+        return (<Image cloudName="cici226" publicId={pubId}  className="mt-2 w-100 ttr-rounded-15px"/>)
+    }
+
   return(
     <div className="position-relative">
-      <img src={`../images/${tuit.image}`}
-           className="mt-2 w-100 ttr-rounded-15px"/>
+        {tuit.image.map(i=>generateImgTag(i))}
+
       {
         tuit.imageOverlay &&
         <span
