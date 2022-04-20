@@ -42,7 +42,7 @@ const Home = () => {
     images.forEach((f) => formData.append("images", f.file));
     formData.append("enctype", "multipart/form-data");
     return axios
-      .post("http://localhost:4000/api/tuits/image/upload", formData, {
+      .post(`${process.env.REACT_APP_BASE_URL}/api/tuits/image/upload`, formData, {
         headers: {
           "content-type": "multipart/form-data",
         },

@@ -10,7 +10,7 @@ function cloudinary({imageSelected, setImageSelected}) {
         formData.append("enctype", "multipart/form-data")
         // formData.append("upload_preset", "loplntvm");
         axios.post(
-            "http://localhost:4000/api/tuits/image/upload",
+            `${process.env.REACT_APP_BASE_URL}/api/tuits/image/upload`,
             formData,{
             headers: {
                 'content-type': 'multipart/form-data'
