@@ -29,8 +29,8 @@ function cloudinary({imageSelected, setImageSelected}) {
             <button onClick={uploadImage}> upload Image</button>
             <Image
              style={{width:200}}
-             cloudName="cici226"
-             publicId="https://res.cloudinary.com/cici226/image/upload/v1650388346/d0am1jatfw0j500xzjyn.jpg"
+             cloudName={process.env.CLOUDINARY_CLOUD_NAME}
+             publicId="https://res.cloudinary.com/hxu0uspw9/image/upload/v1650472353/upload/file_yxq6ei.jpg"
             />
         </div>
     )
