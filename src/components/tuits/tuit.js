@@ -52,9 +52,9 @@ const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, bookmarkTuit}) => {
       </div>
         <div className="w-100">
             <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"/>
-            <Link to={`/tuit/${tuit._id}`}>
-                <i className="float-end fas fa-circle-ellipsis me-1"/>
-            </Link>
+            {/*<Link to={`/tuit/${tuit._id}`}>*/}
+            {/*    <i className="float-end fas fa-circle-ellipsis me-1"/>*/}
+            {/*</Link>*/}
             <h2
                 className="fs-5">
                 {tuit.postedBy && tuit.postedBy.username}
