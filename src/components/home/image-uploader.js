@@ -10,7 +10,6 @@ const upload = ({images, setImages, setImageIds}) => {
     const maxNumber = 4;
     const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
     setImages(imageList);
     };
 

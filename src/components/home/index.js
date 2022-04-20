@@ -59,17 +59,14 @@ const Home = () => {
             })
             setImageIds(imageIds);
             let draftTuit = {tuit: tuit};
-            console.log(draftTuit);
             draftTuit['image'] = imageIds;
             service.createTuit('me', draftTuit)
                 .then(findTuits)
-            console.log(response);
-            console.log(imageIds);
         });
     };
 
     const createTuit = () => {
-        if (imageIds.length > 0) {
+        if (images.length > 0) {
             uploadImage();
         } else {
             service.createTuit('me', {tuit})
