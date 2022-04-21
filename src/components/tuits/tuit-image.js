@@ -1,6 +1,12 @@
 import React from "react";
 import {Image} from 'cloudinary-react';
 
+/**
+ * Component for uploading image within a tuit
+ * @param tuit
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const TuitImage = ({tuit}) => {
     const generateImgTag = (pubId) => {
         // console.log(process.env.REACT_APP_CLOUD_NAME)
