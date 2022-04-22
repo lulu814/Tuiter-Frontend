@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
 import { Modal, Button } from "react-bootstrap";
 
+/**
+ * Component help to upload image
+ * @param images
+ * @param setImages create image object
+ * @param setImageIds create image id
+ * @returns {JSX.Element}
+ */
 const upload = ({ images, setImages, setImageIds }) => {
   const maxNumber = 4;
   const onChange = (imageList, addUpdateIndex) => {
@@ -74,6 +81,14 @@ const upload = ({ images, setImages, setImageIds }) => {
   );
 };
 
+/**
+ * Example image object
+ * @param images
+ * @param setImages create image object
+ * @param setImageIds create image id
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Example = ({ images, setImages, setImageIds }) => {
   const [lgShow, setLgShow] = useState(false);
   const handleClose = () => setLgShow(false);

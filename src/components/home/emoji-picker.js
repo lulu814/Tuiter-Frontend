@@ -4,6 +4,12 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger"
 import 'emoji-mart/css/emoji-mart.css'
 import {Picker} from 'emoji-mart'
 
+/**
+ * Component provides the emoji popover window when creating tuit
+ * @param tuit Tuit object
+ * @param setTuit
+ * @returns {JSX.Element}
+ */
 const emojiPopover = ({tuit, setTuit}) => {
     return (
         <Popover>
@@ -19,6 +25,13 @@ const emojiPopover = ({tuit, setTuit}) => {
     );
 }
 
+/**
+ * Component provides the emoji picking feature
+ * @param tuit Tuit object
+ * @param setTuit
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const EmojiPicker = ({tuit, setTuit}) => {
     return (
         <OverlayTrigger trigger="click" placement="bottom" overlay={emojiPopover({tuit, setTuit})}>

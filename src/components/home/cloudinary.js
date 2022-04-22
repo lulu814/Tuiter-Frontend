@@ -2,6 +2,12 @@ import React, {useState} from "react";
 import axios from "axios";
 import {Image} from "cloudinary-react";
 
+/**
+ * Cloudinary component support image uploading
+ * @param imageSelected selected image
+ * @param setImageSelected
+ * @returns {JSX.Element}
+ */
 function cloudinary({imageSelected, setImageSelected}) {
     const uploadImage = () => {
         const formData = new FormData();

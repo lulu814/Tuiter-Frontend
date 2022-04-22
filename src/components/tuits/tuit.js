@@ -13,6 +13,7 @@ import TuitVideo from "./tuit-video";
  * @param deleteTuit function that will delete a tuit
  * @param likeTuit function triggered when user click like button
  * @param dislikeTuit function triggered when user click dislike button
+ * @param bookmarkTuit function triggered when user click bookmark button
  * @returns {JSX.Element}
  * @constructor
  */
