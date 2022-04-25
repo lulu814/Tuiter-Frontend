@@ -47,6 +47,5 @@ test('click bookmark button will trigger bookmarkTuitMock function', async() => 
 
     const bookmarkButton = screen.getByTestId('test-bookmarkButton');
     await fireEvent.click(bookmarkButton);
-    //expect(bookmarkButton).toHaveBeenCalledTimes(1);
     expect(screen.getByText(MOCKED_TUIT.stats.bookmarks)).toBeInTheDocument();
 })
