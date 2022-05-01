@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import emoji from 'react-easy-emoji'
 
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
-// import {Link, useNavigate} from "react-router-dom";
+import * as service from "../../services/security-service";
+import {useNavigate} from "react-router-dom";
 
 
 /**
@@ -18,7 +19,18 @@ import TuitVideo from "./tuit-video";
  * @constructor
  */
 const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, bookmarkTuit}) => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [profile, setProfile] = useState({});
+    useEffect(async () => {
+        try {
+            const user = await service.profile();
+            setProfile(user);
+        } catch (e) {
+            // if not login, there is no profile, go to login
+            console.log("navigate to login")
+            navigate('/login');
+        }
+    }, []);
     const daysOld = (tuit) => {
         const now = new Date();
         const nowMillis = now.getTime();
@@ -52,7 +64,11 @@ const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, bookmarkTuit}) => {
                 }
             </div>
             <div className="w-100">
-                <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"/>
+                {
+                    tuit.postedBy.username == profile.username &&
+                    <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"/>
+                }
+
                 {/*<Link to={`/tuit/${tuit._id}`}>*/}
                 {/*<i className="float-end fas fa-circle-ellipsis me-1"/>*/}
                 {/*</Link>*/}
